@@ -1,6 +1,10 @@
 ﻿import { Data } from "./App";
-import { Document, Page } from "react-pdf";
+import "react-pdf/dist/Page/TextLayer.css";
+import "react-pdf/dist/Page/AnnotationLayer.css";
 import styles from "./List.module.css";
+import { Document, Page } from "react-pdf";
+import { useMemo } from "react";
+import { getPx } from "../util";
 
 type Props = {
     data :Data[];
@@ -20,10 +24,10 @@ export default function List(props :Props){
 }
 
 function ListItem(props :ItemProps){
-    const {data} = props;
+    const {data} = props, _25dvw = useMemo(()=>getPx("25dvw"), []);
     return(<button className={styles.itemOuter} onClick={()=>props.cb(data.id)}>
-        <Document file={`https://mag.feiyang.ac.cn/pdfs/${data.filename}`}>
-            <Page pageNumber={1} />
+        <Document file={`https://mag.feiyang.ac.cn/pdfs/${data.filename}`} loading={"加载杂志数据中……"}>
+            <Page pageNumber={1} height={_25dvw} />
         </Document>
         <div>{data.year} 年第 {data.index} 期：{data.name}</div>
         <div>{data.description}</div>

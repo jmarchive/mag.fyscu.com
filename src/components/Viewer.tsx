@@ -16,6 +16,8 @@ export default function Viewer(props :Props){
             <div>名称：{data.name}</div>
             <div>{data.description}</div>
         </div>
-        <Document file={`https://mag.feiyang.ac.cn/pdfs/${data.filename}`} />
+        <Document file={`https://mag.feiyang.ac.cn/pdfs/${data.filename}`} loading={"加载杂志数据中……"}>
+            <Page pageNumber={1} />
+        </Document>
     </section>);
 }
